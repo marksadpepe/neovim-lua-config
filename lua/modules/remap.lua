@@ -1,0 +1,5 @@
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set('n', ',<space>', ':nohlsearch<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', ',f', '<cmd>Telescope find_files<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', ',g', '<cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })

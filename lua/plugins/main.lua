@@ -1,0 +1,15 @@
+return {
+    {"neovim/nvim-lspconfig"},
+    {"hrsh7th/nvim-cmp"},
+    {"hrsh7th/cmp-nvim-lsp"},
+    {"saadparwaiz1/cmp_luasnip"},
+    {"L3MON4D3/LuaSnip"},
+    {"lewis6991/gitsigns.nvim"},
+    {"nvim-lua/plenary.nvim"},
+    {"Pocco81/auto-save.nvim"},
+    {"justinmk/vim-sneak"},
+    {"ray-x/lsp_signature.nvim"},
+    {"lspcontainers/lspcontainers.nvim"},
+    {"nvim-telescope/telescope.nvim", tag = "0.1.5"},
+    {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
+}

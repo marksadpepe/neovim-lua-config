@@ -3,3 +3,6 @@ vim.keymap.set('n', ',<space>', ':nohlsearch<CR>', { noremap = true, silent = tr
 vim.keymap.set('n', ',f', '<cmd>Telescope find_files<cr>', { noremap = true, silent = true })
 vim.keymap.set('n', ',g', '<cmd>Telescope live_grep<cr>', { noremap = true, silent = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
+
+vim.keymap.set('n', 'J', 'gt', { noremap = true, silent = true })
+vim.keymap.set('n', 'H', 'gT', { noremap = true, silent = true })

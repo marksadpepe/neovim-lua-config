@@ -1,7 +1,4 @@
 return {
-    {"preservim/nerdcommenter"},
-    {"pangloss/vim-javascript"},
-    {"leafgarland/typescript-vim"},
-    {"jose-elias-alvarez/null-ls.nvim"},
-    {"jose-elias-alvarez/nvim-lsp-ts-utils"},
+    -- ВАЖНО: ветка master. Ветка main требует Neovim 0.11+, здесь 0.10.3
+    {"nvim-treesitter/nvim-treesitter", branch = "master", build = ":TSUpdate"},
 }

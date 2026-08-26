@@ -28,4 +28,3 @@ vim.opt.splitright = true
 -- Show complete menu and disable autoselect
 vim.o.completeopt = "menuone,noselect"
 
-vim.opt.colorcolumn="88"

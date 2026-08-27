@@ -111,6 +111,36 @@ hl("MiniDiffOverChangeBuf", { bg = "#12240f" })
 hl("MiniDiffOverDelete",    { bg = "#2a1414" })
 hl("MiniDiffOverContext",   { bg = DARK })
 
+-- 4d. nvim-tree. Группы перечислены явно, потому что плагин зашивает синий
+--     #8094b4 в NvimTreeFolderIcon, а к нему линкуются стрелки и направляющие;
+--     ExecFile/ImageFile тянут зелёный из Question. Белое — имена, серое —
+--     служебная графика. Git-значки серые по тому же принципу, что и mini.diff:
+--     статус различает форма (~ + ? - » ·), а не цвет.
+hl("NvimTreeNormal",            { fg = WHITE, bg = BLACK })
+hl("NvimTreeWinSeparator",      { fg = GREY,  bg = BLACK })
+hl("NvimTreeRootFolder",        { fg = GREY })
+hl("NvimTreeFolderName",        { fg = WHITE, bold = true })
+hl("NvimTreeOpenedFolderName",  { fg = WHITE, bold = true })
+hl("NvimTreeSymlinkFolderName", { fg = WHITE, bold = true })
+hl("NvimTreeEmptyFolderName",   { fg = GREY })
+hl("NvimTreeFolderIcon",        { fg = GREY })
+hl("NvimTreeIndentMarker",      { fg = GREY })
+hl("NvimTreeFolderArrowClosed", { fg = GREY })
+hl("NvimTreeFolderArrowOpen",   { fg = GREY })
+hl("NvimTreeSpecialFile",       { fg = WHITE })
+hl("NvimTreeExecFile",          { fg = WHITE })
+hl("NvimTreeImageFile",         { fg = WHITE })
+hl("NvimTreeSymlink",           { fg = WHITE, underline = true })
+hl("NvimTreeLiveFilterPrefix",  { fg = GREY })
+hl("NvimTreeLiveFilterValue",   { fg = WHITE })
+for _, g in ipairs({
+  "NvimTreeGitDeletedIcon", "NvimTreeGitDirtyIcon", "NvimTreeGitIgnoredIcon",
+  "NvimTreeGitMergeIcon", "NvimTreeGitNewIcon", "NvimTreeGitRenamedIcon",
+  "NvimTreeGitStagedIcon",
+}) do
+  hl(g, { fg = GREY })
+end
+
 -- 5. Диагностика и орфография. spell включён глобально (set.lua), поэтому
 --    SpellBad делаем подчёркиванием без цвета — иначе он спорит с красным.
 hl("DiagnosticError", { fg = RED })

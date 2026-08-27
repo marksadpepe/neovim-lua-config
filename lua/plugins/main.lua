@@ -6,6 +6,7 @@ return {
     {"L3MON4D3/LuaSnip"},
     {"nvim-lua/plenary.nvim"},
     {"ray-x/lsp_signature.nvim"},
+    {"nvim-mini/mini.diff"},
     {"nvim-telescope/telescope.nvim", tag = "0.1.5"},
     {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
 }

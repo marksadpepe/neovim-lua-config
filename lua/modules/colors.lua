@@ -98,6 +98,19 @@ hl("TelescopePromptPrefix",   { fg = WHITE, bg = "NONE" })
 hl("TelescopeBorder",         { fg = GREY,  bg = "NONE" })
 hl("TelescopeTitle",          { fg = WHITE, bg = "NONE" })
 
+-- 4c. mini.diff. Красный держим за ключевыми словами, поэтому сами знаки
+--     серые: тип изменения различают глифы +, ~, _ (см. modules/minidiff.lua).
+--     Оверлей (,h) — фоном, а не цветом текста: там добавленное и удалённое
+--     стоят рядом и одной формой уже не различаются.
+hl("MiniDiffSignAdd",    { fg = GREY, bg = BLACK })
+hl("MiniDiffSignChange", { fg = GREY, bg = BLACK })
+hl("MiniDiffSignDelete", { fg = GREY, bg = BLACK })
+hl("MiniDiffOverAdd",       { bg = "#12240f" })
+hl("MiniDiffOverChange",    { bg = "#2a1414" })
+hl("MiniDiffOverChangeBuf", { bg = "#12240f" })
+hl("MiniDiffOverDelete",    { bg = "#2a1414" })
+hl("MiniDiffOverContext",   { bg = DARK })
+
 -- 5. Диагностика и орфография. spell включён глобально (set.lua), поэтому
 --    SpellBad делаем подчёркиванием без цвета — иначе он спорит с красным.
 hl("DiagnosticError", { fg = RED })

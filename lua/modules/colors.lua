@@ -1,6 +1,6 @@
--- Минимальная схема: белый текст на чёрном, красным — только ключевые слова.
--- Раскраску даёт treesitter (см. modules/treesitter.lua), поэтому правила
--- пишутся на его захваты @keyword.*, единые для всех языков.
+-- Минимальная схема: белый текст на чёрном, красным — ключевые слова и базовые
+-- типы TS. Раскраску даёт treesitter (см. modules/treesitter.lua), поэтому
+-- правила пишутся на его захваты @keyword.* / @type.builtin, единые для языков.
 
 vim.opt.termguicolors = true -- без этого guifg вообще не применяется в терминале
 vim.o.background = "dark"
@@ -31,7 +31,7 @@ for _, g in ipairs({
   "Exception", "Conditional", "Repeat", "Keyword", "Tag", "SpecialChar", "Title",
   "Underlined", "Directory", "@variable", "@variable.builtin", "@variable.member",
   "@variable.parameter", "@function", "@function.call", "@function.method",
-  "@function.builtin", "@constructor", "@type", "@type.builtin", "@property",
+  "@function.builtin", "@constructor", "@type", "@property",
   "@field", "@method", "@module", "@namespace", "@attribute", "@constant",
   "@constant.builtin", "@boolean", "@number", "@string", "@string.escape",
   "@operator", "@punctuation", "@punctuation.bracket", "@punctuation.delimiter",
@@ -53,6 +53,16 @@ for _, g in ipairs({
 }) do
   hl(g, { fg = RED, bg = "NONE" })
 end
+
+-- 2b. Базовые типы TS — тоже красные: string / number / boolean / any / void /
+--     never / unknown / symbol / object / unique. Тип аннотации видно сразу,
+--     не вчитываясь. Пользовательские типы (@type: User, Promise, Record,
+--     дженерики T) остаются белыми — красный держим за "встроенным словом".
+--     Оговорки парсера: bigint помечен как @type, а не @type.builtin, поэтому
+--     он белый; null / undefined в типах идут как @constant.builtin — одним
+--     захватом со значениями, так что перекрасить их отдельно нельзя.
+--     `new Date()` не краснеет: там последним применяется @constructor.
+hl("@type.builtin", { fg = RED, bg = "NONE" })
 
 -- 3. Комментарии — серые.
 for _, g in ipairs({ "Comment", "@comment", "@comment.documentation", "SpecialComment" }) do

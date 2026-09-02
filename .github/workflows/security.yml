@@ -1,0 +1,50 @@
+name: security
+
+# Любой пуш в любую ветку. Теги не трогаем: релизов у конфига нет.
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+# Все actions пришпилены по SHA, а не по тегу: тег можно переставить, SHA — нет.
+# Ровно та же логика, которую job lockfile требует от плагинов.
+jobs:
+  # Спеки в lua/plugins/*.lua и lazy-lock.json должны описывать одно и то же.
+  # Без сети, поэтому падает быстро и первым.
+  lockfile:
+    name: lock-файл
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - run: python3 .github/scripts/lazy_audit.py lock
+
+  # Главная проверка цепочки поставок: пришпиленный коммит всё ещё есть
+  # у апстрима и лежит в объявленной ветке (или ровно на объявленном теге).
+  # Ловит force-push, переставленный тег и удалённый репозиторий.
+  upstream:
+    name: пины апстрима
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - run: python3 .github/scripts/lazy_audit.py upstream
+        env:
+          # Без токена лимит 60 запросов в час на IP раннера и job падает
+          # на ровном месте; с ним — 1000 на репозиторий.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Известные уязвимости по базе OSV. Плагины Neovim там почти не покрыты,
+  # так что зелёный статус здесь — отсутствие сигнала, а не гарантия;
+  # реальную работу делает job upstream.
+  osv:
+    name: OSV
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - run: python3 .github/scripts/lazy_audit.py osv

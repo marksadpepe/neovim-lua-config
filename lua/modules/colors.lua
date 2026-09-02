@@ -108,23 +108,34 @@ hl("TelescopePromptPrefix",   { fg = WHITE, bg = "NONE" })
 hl("TelescopeBorder",         { fg = GREY,  bg = "NONE" })
 hl("TelescopeTitle",          { fg = WHITE, bg = "NONE" })
 
--- 4c. mini.diff. Красный держим за ключевыми словами, поэтому сами знаки
---     серые: тип изменения различают глифы +, ~, _ (см. modules/minidiff.lua).
+-- 4c. gitsigns. Красный держим за ключевыми словами, поэтому сами знаки
+--     серые: тип изменения различают глифы +, ~, _ (см. modules/gitsigns.lua).
 --     Оверлей (,h) — фоном, а не цветом текста: там добавленное и удалённое
 --     стоят рядом и одной формой уже не различаются.
-hl("MiniDiffSignAdd",    { fg = GREY, bg = BLACK })
-hl("MiniDiffSignChange", { fg = GREY, bg = BLACK })
-hl("MiniDiffSignDelete", { fg = GREY, bg = BLACK })
-hl("MiniDiffOverAdd",       { bg = "#12240f" })
-hl("MiniDiffOverChange",    { bg = "#2a1414" })
-hl("MiniDiffOverChangeBuf", { bg = "#12240f" })
-hl("MiniDiffOverDelete",    { bg = "#2a1414" })
-hl("MiniDiffOverContext",   { bg = DARK })
+hl("GitSignsAdd",    { fg = GREY, bg = BLACK })
+hl("GitSignsChange", { fg = GREY, bg = BLACK })
+hl("GitSignsDelete", { fg = GREY, bg = BLACK })
+-- Blame текущей строки — служебный текст, тем же серым, что и комментарии:
+-- он висит в каждой строке под курсором и не должен спорить с кодом.
+hl("GitSignsCurrentLineBlame", { fg = GREY, bg = "NONE" })
+-- Ln — подсветка строк в самом буфере, VirtLn — развёрнутые удалённые строки,
+-- Inline/InLine — посимвольная разница внутри строки (ярче на тон).
+hl("GitSignsAddLn",              { bg = "#12240f" })
+hl("GitSignsChangeLn",           { bg = "#2a1414" })
+hl("GitSignsAddInline",          { bg = "#1e3d18" })
+hl("GitSignsChangeInline",       { bg = "#4a2020" })
+hl("GitSignsDeleteInline",       { bg = "#4a2020" })
+hl("GitSignsDeleteVirtLn",       { bg = "#2a1414" })
+hl("GitSignsDeleteVirtLnInLine", { bg = "#4a2020" })
+hl("GitSignsVirtLnum",           { fg = GREY,  bg = "#2a1414" })
+-- Попапы blame (,b) и превью ханка идут на фоне NormalFloat.
+hl("GitSignsAddPreview",    { bg = "#12240f" })
+hl("GitSignsDeletePreview", { bg = "#2a1414" })
 
 -- 4d. nvim-tree. Группы перечислены явно, потому что плагин зашивает синий
 --     #8094b4 в NvimTreeFolderIcon, а к нему линкуются стрелки и направляющие;
 --     ExecFile/ImageFile тянут зелёный из Question. Белое — имена, серое —
---     служебная графика. Git-значки серые по тому же принципу, что и mini.diff:
+--     служебная графика. Git-значки серые по тому же принципу, что и gitsigns:
 --     статус различает форма (~ + ? - » ·), а не цвет.
 hl("NvimTreeNormal",            { fg = WHITE, bg = BLACK })
 hl("NvimTreeWinSeparator",      { fg = GREY,  bg = BLACK })

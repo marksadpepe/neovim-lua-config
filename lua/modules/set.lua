@@ -7,7 +7,7 @@ vim.opt.encoding = "utf-8"
 vim.opt.mouse = "a"
 vim.opt.swapfile = false
 vim.opt.scrolloff = 7
--- Колонка знаков всегда на месте: иначе первый же ханк mini.diff
+-- Колонка знаков всегда на месте: иначе первый же ханк gitsigns
 -- сдвигает текст, а при уходе последнего он прыгает обратно.
 vim.opt.signcolumn = "yes"
 

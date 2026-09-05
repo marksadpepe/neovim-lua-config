@@ -98,11 +98,13 @@ vim.cmd([[
   command! -bang -complete=buffer -nargs=? Bclose lua require('modules.help').bclose('<bang>', '<args>')
 ]])
 
-vim.keymap.set('n', 'gn', ':bn<CR>', { noremap = false, silent = true })
+-- Через modules.tabline, а не :bn/:bp/:Bclose напрямую: нажатые внутри панели
+-- дерева, они подменили бы буфер в самой панели.
+vim.keymap.set('n', 'gn', function() require('modules.tabline').next() end, { noremap = true, silent = true })
 
-vim.keymap.set('n', 'gp', ':bp<CR>', { noremap = false, silent = true })
+vim.keymap.set('n', 'gp', function() require('modules.tabline').prev() end, { noremap = true, silent = true })
 
-vim.keymap.set('n', 'gw', ':Bclose<CR>', { noremap = false, silent = true })
+vim.keymap.set('n', 'gw', function() require('modules.tabline').close() end, { noremap = true, silent = true })
 
 vim.keymap.set('n', '<Leader>bd', function() 
   require('modules.help').bclose('', '') 

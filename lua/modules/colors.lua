@@ -92,9 +92,17 @@ hl("FoldColumn",   { fg = GREY,  bg = BLACK })
 hl("NonText",      { fg = GREY })
 hl("EndOfBuffer",  { fg = BLACK })
 hl("Folded",       { fg = GREY,  bg = DARK })
+-- Полоска вкладок (modules/tabline.lua) как в VS Code: активная вкладка живёт
+-- на фоне редактора, неактивные — на тон светлее фона и серым текстом,
+-- разделитель между ними тонкий. Инверсии чёрное-на-белом здесь нет намеренно:
+-- она перетягивала на себя всё внимание с кода.
 hl("TabLine",      { fg = GREY,  bg = DARK })
-hl("TabLineSel",   { fg = BLACK, bg = WHITE })
-hl("TabLineFill",  { bg = BLACK })
+hl("TabLineSel",   { fg = WHITE, bg = BLACK, bold = true })
+hl("TabLineFill",  { bg = DARK })
+hl("TabLineSep",   { fg = "#3a3a3a", bg = DARK })
+-- Шапка панели в левом краю полоски. Фон — как у панели, чтобы надпись читалась
+-- её частью, текст серый: это служебная подпись, а не код.
+hl("TabLineTitle", { fg = GREY,  bg = BLACK })
 
 -- 4b. Telescope. Без этого TelescopeSelection наследует Visual, то есть жёсткую
 --     инверсию — на чёрном фоне она бьёт по глазам. Здесь выбранная строка просто
@@ -132,35 +140,21 @@ hl("GitSignsVirtLnum",           { fg = GREY,  bg = "#2a1414" })
 hl("GitSignsAddPreview",    { bg = "#12240f" })
 hl("GitSignsDeletePreview", { bg = "#2a1414" })
 
--- 4d. nvim-tree. Группы перечислены явно, потому что плагин зашивает синий
---     #8094b4 в NvimTreeFolderIcon, а к нему линкуются стрелки и направляющие;
---     ExecFile/ImageFile тянут зелёный из Question. Белое — имена, серое —
---     служебная графика. Git-значки серые по тому же принципу, что и gitsigns:
---     статус различает форма (~ + ? - » ·), а не цвет.
-hl("NvimTreeNormal",            { fg = WHITE, bg = BLACK })
-hl("NvimTreeWinSeparator",      { fg = GREY,  bg = BLACK })
-hl("NvimTreeRootFolder",        { fg = GREY })
-hl("NvimTreeFolderName",        { fg = WHITE, bold = true })
-hl("NvimTreeOpenedFolderName",  { fg = WHITE, bold = true })
-hl("NvimTreeSymlinkFolderName", { fg = WHITE, bold = true })
-hl("NvimTreeEmptyFolderName",   { fg = GREY })
-hl("NvimTreeFolderIcon",        { fg = GREY })
-hl("NvimTreeIndentMarker",      { fg = GREY })
-hl("NvimTreeFolderArrowClosed", { fg = GREY })
-hl("NvimTreeFolderArrowOpen",   { fg = GREY })
-hl("NvimTreeSpecialFile",       { fg = WHITE })
-hl("NvimTreeExecFile",          { fg = WHITE })
-hl("NvimTreeImageFile",         { fg = WHITE })
-hl("NvimTreeSymlink",           { fg = WHITE, underline = true })
-hl("NvimTreeLiveFilterPrefix",  { fg = GREY })
-hl("NvimTreeLiveFilterValue",   { fg = WHITE })
-for _, g in ipairs({
-  "NvimTreeGitDeletedIcon", "NvimTreeGitDirtyIcon", "NvimTreeGitIgnoredIcon",
-  "NvimTreeGitMergeIcon", "NvimTreeGitNewIcon", "NvimTreeGitRenamedIcon",
-  "NvimTreeGitStagedIcon",
-}) do
-  hl(g, { fg = GREY })
-end
+-- 4d. Панель файлов (modules/explorer.lua). Белое — имена, серое — служебная
+--     графика (стрелки, имя проекта, git-значки: статус различает форма
+--     значка ~ + ? - ! », а не цвет, — тем же принципом, что и gitsigns).
+--     Текущий файл — фоном на всю строку: заметно с первого взгляда, но красный
+--     остаётся значить ровно "ключевое слово". CursorLine в панели чуть темнее
+--     этой подсветки, поэтому курсор и текущий файл видно отдельно.
+hl("ExplorerNormal",     { fg = WHITE, bg = BLACK })
+hl("ExplorerRoot",       { fg = GREY })
+hl("ExplorerDir",        { fg = WHITE, bold = true })
+hl("ExplorerFile",       { fg = WHITE })
+hl("ExplorerLink",       { fg = WHITE, underline = true })
+hl("ExplorerArrow",      { fg = GREY })
+hl("ExplorerGit",        { fg = GREY })
+hl("ExplorerCurrent",    { fg = WHITE, bg = "#303030", bold = true })
+hl("ExplorerCursorLine", { bg = "#1c1c1c" })
 
 -- 5. Диагностика и орфография. spell включён глобально (set.lua), поэтому
 --    SpellBad делаем подчёркиванием без цвета — иначе он спорит с красным.

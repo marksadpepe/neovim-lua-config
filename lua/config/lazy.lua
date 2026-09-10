@@ -30,6 +30,9 @@ require("lazy").setup({
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
-  checker = { enabled = true },
+  -- Обновления ищем, но молча: со стандартным notify каждый старт открывал
+  -- список "Plugin Updates" с "Press ENTER". Смотреть их — :Lazy.
+  checker = { enabled = true, notify = false },
+  -- Тем же самым была всплывашка "Config Change Detected" после правки конфига.
+  change_detection = { notify = false },
 })
